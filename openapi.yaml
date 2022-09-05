@@ -73,6 +73,7 @@ paths:
     get:
       tags:
         - Agenda
+      summary: Listar eventos do aprovador
       parameters:
         - name: aprovador
           in: path
@@ -103,6 +104,7 @@ paths:
     get:
       tags:
         - Agenda
+      summary: Listar visitantes recorrentes do aprovador
       parameters:
         - name: aprovador
           in: path
@@ -133,6 +135,7 @@ paths:
     post:
       tags:
         - Agenda
+      summary: Criar novo evento
       requestBody:
         content:
           application/json:
@@ -151,6 +154,7 @@ paths:
     post:
       tags:
         - Agenda
+      summary: Criar nova vista recorrente
       requestBody:
         content:
           application/json:
@@ -169,6 +173,7 @@ paths:
     put:
       tags:
         - Agenda
+      summary: Editar evento
       parameters:
         - name: id
           in: path
@@ -194,6 +199,7 @@ paths:
     delete:
       tags:
         - Agenda
+      summary: Excluir evento
       parameters:
         - name: id
           in: path
@@ -232,6 +238,7 @@ paths:
     get:
       tags:
         - Aprovador
+      summary: Busca o aprovador pelo ID
       parameters:
         - name: id
           in: path
@@ -246,6 +253,7 @@ paths:
     get:
       tags:
         - Aprovador
+      summary: Busca o aprovador pelo email
       parameters:
         - name: email
           in: query
@@ -258,6 +266,7 @@ paths:
     get:
       tags:
         - Aprovador
+      summary: Lista todos os locais do aprovador
       parameters:
         - name: aprovador
           in: query
@@ -287,6 +296,7 @@ paths:
     post:
       tags:
         - Aprovador
+      summary: Registar novo aprovador
       parameters:
         - name: email
           in: query
@@ -299,6 +309,7 @@ paths:
     post:
       tags:
         - Aprovador
+      summary: Adicionar novo aprovador
       requestBody:
         content:
           application/json:
@@ -317,6 +328,7 @@ paths:
     post:
       tags:
         - Aprovador
+      summary: Adicionar foto do aprovador
       requestBody:
         content:
           application/json:
@@ -335,6 +347,7 @@ paths:
     post:
       tags:
         - Aprovador
+      summary: Adicionar local ao aprovador
       parameters:
         - name: aprovador
           in: query
@@ -353,6 +366,7 @@ paths:
     post:
       tags:
         - Aprovador
+      summary: Adicionar dispositivo para notificações
       requestBody:
         content:
           application/json:
@@ -371,6 +385,7 @@ paths:
     get:
       tags:
         - Aprovador
+      summary: Buscar foto do aprovador
       parameters:
         - name: idAprovador
           in: query
@@ -384,6 +399,7 @@ paths:
     put:
       tags:
         - Aprovador
+      summary: Alterar status do aprovador para ativo/inativo
       parameters:
         - name: id
           in: query
@@ -397,6 +413,7 @@ paths:
     put:
       tags:
         - Aprovador
+      summary: Alterar senha do usuario
       parameters:
         - name: email
           in: query
@@ -420,6 +437,7 @@ paths:
     put:
       tags:
         - Aprovador
+      summary: Editar dados do aprovador
       requestBody:
         content:
           application/json:
@@ -438,6 +456,7 @@ paths:
     delete:
       tags:
         - Aprovador
+      summary: Deletar aprovador
       parameters:
         - name: id
           in: query
