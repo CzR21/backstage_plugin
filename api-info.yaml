@@ -6,6 +6,6 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: team-a
+  owner: guest
   definition:
     $text: https://github.com/CzR21/backstage_plugin/blob/main/openapi.yaml
