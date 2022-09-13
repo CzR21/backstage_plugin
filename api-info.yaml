@@ -8,7 +8,7 @@ spec:
   lifecycle: production
   owner: team-a
   definition:
-    $text: https://github.com/CzR21/backstage_plugin/blob/main/openapi-visitante.yaml
+    $text: https://github.com/CzR21/backstage_plugin/blob/main/api/openapi-visitante.yaml
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -20,7 +20,7 @@ spec:
   lifecycle: production
   owner: team-b
   definition:
-    $text: https://github.com/CzR21/backstage_plugin/blob/main/openapi-local.yaml
+    $text: https://github.com/CzR21/backstage_plugin/blob/main/api/openapi-local.yaml
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -32,7 +32,7 @@ spec:
   lifecycle: production
   owner: team-c
   definition:
-    $text: https://github.com/CzR21/backstage_plugin/blob/main/openapi-aprovador.yaml
+    $text: https://github.com/CzR21/backstage_plugin/blob/main/api/openapi-aprovador.yaml
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -44,4 +44,4 @@ spec:
   lifecycle: production
   owner: team-d
   definition:
-    $text: https://github.com/CzR21/backstage_plugin/blob/main/openapi-convite.yaml
+    $text: https://github.com/CzR21/backstage_plugin/blob/main/api/openapi-convite.yaml
