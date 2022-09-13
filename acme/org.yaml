@@ -23,10 +23,10 @@ metadata:
   description: A collection of all Backstage example Groups
 spec:
   targets:
-    - ./infrastructure-group.yaml
-    - ./boxoffice-group.yaml
-    - ./backstage-group.yaml
-    - ./team-a-group.yaml
-    - ./team-b-group.yaml
-    - ./team-c-group.yaml
-    - ./team-d-group.yaml
+    - https://github.com/CzR21/backstage_plugin/blob/main/acme/infrastructure-group.yaml
+    - https://github.com/CzR21/backstage_plugin/blob/main/acme/boxoffice-group.yaml
+    - https://github.com/CzR21/backstage_plugin/blob/main/acme/backstage-group.yaml
+    - https://github.com/CzR21/backstage_plugin/blob/main/acme/team-a-group.yaml
+    - https://github.com/CzR21/backstage_plugin/blob/main/acme/team-b-group.yaml
+    - https://github.com/CzR21/backstage_plugin/blob/main/acme/team-c-group.yaml
+    - https://github.com/CzR21/backstage_plugin/blob/main/acme/team-d-group.yaml
