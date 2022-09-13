@@ -1,0 +1,1332 @@
+openapi: 3.0.1
+info:
+  title: GoVisitAPI.APP-Aprovador
+  version: v1
+paths:
+
+  /api/Condominio/listar:
+    get:
+      tags:
+        - Condominio
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Condominio'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Condominio'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Condominio'
+  /api/Condominio/criar:
+    post:
+      tags:
+        - Condominio
+      parameters:
+        - name: user
+          in: query
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CondominioModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CondominioModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CondominioModel'
+      responses:
+        '200':
+          description: Success
+  /api/Condominio/editar/{id}:
+    put:
+      tags:
+        - Condominio
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CondominioModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CondominioModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CondominioModel'
+      responses:
+        '200':
+          description: Success
+  /api/Condominio/deletar/{id}:
+    delete:
+      tags:
+        - Condominio
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  /api/Local/listar:
+    get:
+      tags:
+        - Local
+      parameters:
+        - name: condominio
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VisitanteModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VisitanteModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VisitanteModel'
+  /api/Local/{id}:
+    get:
+      tags:
+        - Local
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+        - Local
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  /api/Local/buscar-localizacao:
+    get:
+      tags:
+        - Local
+      parameters:
+        - name: localizacao
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+  /api/Local:
+    post:
+      tags:
+        - Local
+      parameters:
+        - name: user
+          in: query
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocalModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/LocalModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/LocalModel'
+      responses:
+        '200':
+          description: Success
+  /api/Local/editar/{id}:
+    put:
+      tags:
+        - Local
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocalModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/LocalModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/LocalModel'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    Aprovador:
+      type: object
+      properties:
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        id:
+          type: string
+          format: uuid
+        nomeCompleto:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        celular:
+          type: string
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        documentos:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentoAprovador'
+          nullable: true
+        fotos:
+          type: array
+          items:
+            $ref: '#/components/schemas/FotoAprovador'
+          nullable: true
+        dipositivo:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dispositivo'
+          nullable: true
+        localAprovadores:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalAprovador'
+          nullable: true
+        conviteVisitas:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConviteVisita'
+          nullable: true
+        conviteAprovador:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConviteAprovador'
+          nullable: true
+      additionalProperties: false
+    AprovadorModel:
+      required:
+        - celular
+        - email
+        - nomeCompleto
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        nomeCompleto:
+          minLength: 1
+          type: string
+        email:
+          minLength: 1
+          pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}'
+          type: string
+        celular:
+          maxLength: 13
+          minLength: 0
+          type: string
+          format: tel
+        tipoStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ChangePasswordModel:
+      type: object
+      properties:
+        currentPassword:
+          type: string
+          nullable: true
+        newPassword:
+          type: string
+          nullable: true
+        confirmPassword:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Condominio:
+      type: object
+      properties:
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        id:
+          type: string
+          format: uuid
+        nome:
+          type: string
+          nullable: true
+        tipoCondominio:
+          $ref: '#/components/schemas/TipoCondominio'
+        logradouro:
+          type: string
+          nullable: true
+        numero:
+          type: string
+          nullable: true
+        complemento:
+          type: string
+          nullable: true
+        bairro:
+          type: string
+          nullable: true
+        cidade:
+          type: string
+          nullable: true
+        uf:
+          type: string
+          nullable: true
+        config:
+          $ref: '#/components/schemas/CondominioConfig'
+        parametroValores:
+          type: array
+          items:
+            $ref: '#/components/schemas/CondominioParametroValor'
+          nullable: true
+      additionalProperties: false
+    CondominioConfig:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        tipoLayout:
+          $ref: '#/components/schemas/TipoLayout'
+        hexCorPrimaria:
+          type: string
+          nullable: true
+        hexCorSecundaria:
+          type: string
+          nullable: true
+        urlLogo:
+          type: string
+          nullable: true
+        nomeAplicativo:
+          type: string
+          nullable: true
+        idCondominio:
+          type: string
+          format: uuid
+        condominio:
+          $ref: '#/components/schemas/Condominio'
+      additionalProperties: false
+    CondominioModel:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        nome:
+          type: string
+          nullable: true
+        logradouro:
+          type: string
+          nullable: true
+        numero:
+          type: string
+          nullable: true
+        complemento:
+          type: string
+          nullable: true
+        bairro:
+          type: string
+          nullable: true
+        cidade:
+          type: string
+          nullable: true
+        uf:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CondominioParametroChave:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        chave:
+          type: string
+          nullable: true
+        descricao:
+          type: string
+          nullable: true
+        tipoChave:
+          type: string
+          nullable: true
+        valorPadrao:
+          type: string
+          nullable: true
+        parametroValores:
+          type: array
+          items:
+            $ref: '#/components/schemas/CondominioParametroValor'
+          nullable: true
+      additionalProperties: false
+    CondominioParametroValor:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        chave:
+          type: string
+          nullable: true
+        descricao:
+          type: string
+          nullable: true
+        valorCondominio:
+          type: string
+          nullable: true
+        idCondominioParametroChave:
+          type: string
+          format: uuid
+        parametroChave:
+          $ref: '#/components/schemas/CondominioParametroChave'
+        idCondomino:
+          type: string
+          format: uuid
+        condominio:
+          $ref: '#/components/schemas/Condominio'
+      additionalProperties: false
+    ConviteAprovador:
+      type: object
+      properties:
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        id:
+          type: string
+          format: uuid
+        titulo:
+          type: string
+          nullable: true
+        tolerancia:
+          type: integer
+          format: int32
+        dataInicio:
+          type: string
+          format: date-time
+        dataFim:
+          type: string
+          format: date-time
+        horarioInicio:
+          $ref: '#/components/schemas/TimeSpan'
+        horarioFim:
+          $ref: '#/components/schemas/TimeSpan'
+        tipoConviteVisita:
+          $ref: '#/components/schemas/TipoConviteVisita'
+        observacoes:
+          type: string
+          nullable: true
+        urlConviteVisita:
+          type: string
+          nullable: true
+        idAprovador:
+          type: string
+          format: uuid
+        aprovador:
+          $ref: '#/components/schemas/Aprovador'
+        idLocal:
+          type: string
+          format: uuid
+        local:
+          $ref: '#/components/schemas/Local'
+      additionalProperties: false
+    ConviteModel:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        titulo:
+          type: string
+          nullable: true
+        idLocal:
+          type: string
+          format: uuid
+        dataInicio:
+          type: string
+          format: date-time
+        dataFim:
+          type: string
+          format: date-time
+        horarioInicio:
+          type: string
+          nullable: true
+        horarioFim:
+          type: string
+          nullable: true
+        tipoConviteVisita:
+          type: string
+          nullable: true
+        tipoStatus:
+          type: string
+          nullable: true
+        tolerancia:
+          type: string
+          nullable: true
+        urlConviteVisita:
+          type: string
+          nullable: true
+        quantidadeVisitas:
+          type: string
+          nullable: true
+        observacoes:
+          type: string
+          nullable: true
+        idAprovador:
+          type: string
+          format: uuid
+      additionalProperties: false
+    ConviteVisita:
+      type: object
+      properties:
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        id:
+          type: string
+          format: uuid
+        titulo:
+          type: string
+          nullable: true
+        tolerancia:
+          type: integer
+          format: int32
+        dataInicio:
+          type: string
+          format: date-time
+        dataFim:
+          type: string
+          format: date-time
+        horarioInicio:
+          $ref: '#/components/schemas/TimeSpan'
+        horarioFim:
+          $ref: '#/components/schemas/TimeSpan'
+        tipoConviteVisita:
+          $ref: '#/components/schemas/TipoConviteVisita'
+        observacoes:
+          type: string
+          nullable: true
+        quantidadeVisitas:
+          type: integer
+          format: int32
+        urlConviteVisita:
+          type: string
+          nullable: true
+        idAprovador:
+          type: string
+          format: uuid
+        aprovador:
+          $ref: '#/components/schemas/Aprovador'
+        idLocal:
+          type: string
+          format: uuid
+        local:
+          $ref: '#/components/schemas/Local'
+        conviteVisitaVisitantes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConviteVisitaVisitante'
+          nullable: true
+      additionalProperties: false
+    ConviteVisitaVisitante:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        statusConviteVisitaVisitante:
+          $ref: '#/components/schemas/StatusConviteVisitaVisitante'
+        idConviteVisita:
+          type: string
+          format: uuid
+        conviteVisita:
+          $ref: '#/components/schemas/ConviteVisita'
+        idVisitante:
+          type: string
+          format: uuid
+        visitante:
+          $ref: '#/components/schemas/Visitante'
+      additionalProperties: false
+    CreateUserModel:
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: true
+        confirmEmail:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+        confirmPassword:
+          type: string
+          nullable: true
+        role:
+          type: string
+          nullable: true
+        id:
+          type: string
+          nullable: true
+        nomeCompleto:
+          type: string
+          nullable: true
+        celular:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Dispositivo:
+      type: object
+      properties:
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        id:
+          type: string
+          format: uuid
+        tokenDispositivo:
+          type: string
+          nullable: true
+        idAprovador:
+          type: string
+          format: uuid
+        aprovador:
+          $ref: '#/components/schemas/Aprovador'
+      additionalProperties: false
+    DispositivoModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        tokenDispositivo:
+          type: string
+          nullable: true
+        idAprovador:
+          type: string
+          format: uuid
+      additionalProperties: false
+    DocumentoAprovador:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        documento:
+          type: string
+          nullable: true
+        tipoDocumento:
+          $ref: '#/components/schemas/TipoDocumento'
+        idAprovador:
+          type: string
+          format: uuid
+        aprovador:
+          $ref: '#/components/schemas/Aprovador'
+      additionalProperties: false
+    FotoAprovador:
+      type: object
+      properties:
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          nullable: true
+        tipoFoto:
+          $ref: '#/components/schemas/TipoFoto'
+        idAprovador:
+          type: string
+          format: uuid
+        aprovador:
+          $ref: '#/components/schemas/Aprovador'
+      additionalProperties: false
+    FotoModel:
+      type: object
+      properties:
+        url:
+          type: string
+          nullable: true
+        tipoFoto:
+          $ref: '#/components/schemas/TipoFoto'
+        idAprovador:
+          type: string
+          format: uuid
+        fotoBase64:
+          type: string
+          nullable: true
+      additionalProperties: false
+    FotoVisitante:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        url:
+          type: string
+          nullable: true
+        tipoFoto:
+          $ref: '#/components/schemas/TipoFoto'
+        idVisitante:
+          type: string
+          format: uuid
+        visitante:
+          $ref: '#/components/schemas/Visitante'
+      additionalProperties: false
+    Local:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        localizacaoInterna:
+          type: string
+          nullable: true
+        codigoLocalizacaoInterna:
+          type: string
+          nullable: true
+        obs:
+          type: string
+          nullable: true
+        idCondominio:
+          type: string
+          format: uuid
+        localVisitantes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalVisitante'
+          nullable: true
+        localAprovadores:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalAprovador'
+          nullable: true
+        conviteVisitas:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConviteVisita'
+          nullable: true
+        conviteAprovador:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConviteAprovador'
+          nullable: true
+      additionalProperties: false
+    LocalAprovador:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        idLocal:
+          type: string
+          format: uuid
+        local:
+          $ref: '#/components/schemas/Local'
+        idAprovador:
+          type: string
+          format: uuid
+        aprovador:
+          $ref: '#/components/schemas/Aprovador'
+        tipoLocalAprovador:
+          $ref: '#/components/schemas/TipoLocalAprovador'
+        tipoVerificador:
+          $ref: '#/components/schemas/TipoVerificador'
+        idVerificador:
+          type: string
+          format: uuid
+          nullable: true
+        localAprovadorConfig:
+          $ref: '#/components/schemas/LocalAprovadorConfig'
+      additionalProperties: false
+    LocalAprovadorConfig:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        idLocalAprovador:
+          type: string
+          format: uuid
+        localAprovador:
+          $ref: '#/components/schemas/LocalAprovador'
+        diasSemana:
+          type: integer
+          format: int32
+        dataValidadeInicio:
+          type: string
+          format: date-time
+        dataValidadeFim:
+          type: string
+          format: date-time
+        horarioInicio:
+          $ref: '#/components/schemas/TimeSpan'
+        horarioFim:
+          $ref: '#/components/schemas/TimeSpan'
+      additionalProperties: false
+    LocalModel:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        localizacaoInterna:
+          type: string
+          nullable: true
+        codigoLocalizacaoInterna:
+          type: string
+          nullable: true
+        obs:
+          type: string
+          nullable: true
+        idCondominio:
+          type: string
+          format: uuid
+      additionalProperties: false
+    LocalVisitante:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        idLocal:
+          type: string
+          format: uuid
+        local:
+          $ref: '#/components/schemas/Local'
+        idVisitante:
+          type: string
+          format: uuid
+        visitante:
+          $ref: '#/components/schemas/Visitante'
+        tipoVerificador:
+          $ref: '#/components/schemas/TipoVerificador'
+        idVerificador:
+          type: string
+          format: uuid
+          nullable: true
+      additionalProperties: false
+    SignInModel:
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+      additionalProperties: false
+    StatusConviteVisitaVisitante:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      type: integer
+      format: int32
+    TimeSpan:
+      type: object
+      properties:
+        ticks:
+          type: integer
+          format: int64
+        days:
+          type: integer
+          format: int32
+          readOnly: true
+        hours:
+          type: integer
+          format: int32
+          readOnly: true
+        milliseconds:
+          type: integer
+          format: int32
+          readOnly: true
+        minutes:
+          type: integer
+          format: int32
+          readOnly: true
+        seconds:
+          type: integer
+          format: int32
+          readOnly: true
+        totalDays:
+          type: number
+          format: double
+          readOnly: true
+        totalHours:
+          type: number
+          format: double
+          readOnly: true
+        totalMilliseconds:
+          type: number
+          format: double
+          readOnly: true
+        totalMinutes:
+          type: number
+          format: double
+          readOnly: true
+        totalSeconds:
+          type: number
+          format: double
+          readOnly: true
+      additionalProperties: false
+    TipoCondominio:
+      enum:
+        - 0
+        - 1
+      type: integer
+      format: int32
+    TipoConviteVisita:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      type: integer
+      format: int32
+    TipoDocumento:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    TipoFoto:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    TipoLayout:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    TipoLocalAprovador:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    TipoStatus:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    TipoVerificador:
+      enum:
+        - 0
+        - 1
+      type: integer
+      format: int32
+    Visitante:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        criadoPor:
+          type: string
+          format: uuid
+        dataCriacao:
+          type: string
+          format: date-time
+        modificadoPor:
+          type: string
+          format: uuid
+          nullable: true
+        dataModificacao:
+          type: string
+          format: date-time
+          nullable: true
+        tipoStatus:
+          $ref: '#/components/schemas/TipoStatus'
+        nomeCompleto:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        celular:
+          type: string
+          nullable: true
+        documento:
+          type: string
+          nullable: true
+        tipoDocumento:
+          $ref: '#/components/schemas/TipoDocumento'
+        fotos:
+          type: array
+          items:
+            $ref: '#/components/schemas/FotoVisitante'
+          nullable: true
+        localVisitantes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalVisitante'
+          nullable: true
+        conviteVisitaVisitantes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConviteVisitaVisitante'
+          nullable: true
+      additionalProperties: false
+    VisitanteModel:
+      required:
+        - celular
+        - documento
+        - email
+        - nomeCompleto
+        - tipoDocumento
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        nomeCompleto:
+          minLength: 1
+          type: string
+        email:
+          minLength: 1
+          pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}'
+          type: string
+        celular:
+          maxLength: 13
+          minLength: 0
+          type: string
+          format: tel
+        documento:
+          maxLength: 11
+          minLength: 9
+          type: string
+        tipoDocumento:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    WeatherForecast:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        temperatureC:
+          type: integer
+          format: int32
+        temperatureF:
+          type: integer
+          format: int32
+          readOnly: true
+        summary:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+security:
+  - Bearer: []
