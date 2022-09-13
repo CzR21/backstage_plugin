@@ -15,7 +15,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: calum.leavy
+  name: cesar.arandas
 spec:
   profile:
     displayName:  Cesar Arandas
