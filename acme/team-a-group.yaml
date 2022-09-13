@@ -29,9 +29,9 @@ metadata:
   name: janelle.dawe
 spec:
   profile:
-    displayName: Cesar Silva
-    email: cesararandas3@gmail.com
-    picture: https://avatars.githubusercontent.com/u/95049536?s=60&v=4
+    displayName: Janelle Dawe
+    email: janelle-dawe@example.com
+    picture: https://avatars.dicebear.com/api/avataaars/janelle-dawe@example.com.svg?background=%23fff
   memberOf: [team-a]
 ---
 apiVersion: backstage.io/v1alpha1
