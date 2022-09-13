@@ -4,5 +4,4 @@ metadata:
   name: acme-corp
   description: A collection of all Backstage example Groups
 spec:
-  targets:
-    - ./acme/org.yaml
+  targets: https://github.com/CzR21/backstage_plugin/blob/main/acme/org.yaml
